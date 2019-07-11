@@ -21,8 +21,7 @@ plot_mirt <- function(x, nombre_var, nombres_nuevos, titulo="", nombre_svg=NULL,
 
     # Abrimos un nuevo PNG si se lo hemos indicado
     if (!is.null(nombre_svg)){
-        print("Creating Saving to png")
-        svg(filename=nombre_svg)#, width = res[1], height = res[2])
+        svg(filename=nombre_svg, width = res[1], height = res[2])
     }
     # scales="free" quita las líneas de arriba :)
     plt <- plot(x, type = 'trace', which.items=var_id, main=titulo, scales="free", ...)
@@ -33,7 +32,7 @@ plot_mirt <- function(x, nombre_var, nombres_nuevos, titulo="", nombre_svg=NULL,
     if (!is.null(nombre_svg)) {
         print(plt)
         dev.off()
-        print("Saving to png")
+        cat("Saving to svg to ", nombre_svg,"\n")
     } else {
         plt
     }
