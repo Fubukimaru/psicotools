@@ -9,7 +9,7 @@ x <- mirt(Science, 1, SE=TRUE)
 # ahora. Estás diciéndole a R que hay un codigo que se llama plot_mirt y que
 # puede usarlo.
 plot_mirt <- function(x, nombre_var, nombres_nuevos, titulo="", nombre_svg=NULL,
-                     res=c(5,5), ...) {
+                     res=c(5,5), nombre_curvas=NULL, ...) {
     # Sacamos los nombres originales de las variables
     names <- dimnames(x@Data$data)[[2]]
     # Buscamos que identificador numérico tienen
@@ -25,6 +25,11 @@ plot_mirt <- function(x, nombre_var, nombres_nuevos, titulo="", nombre_svg=NULL,
     }
     # scales="free" quita las líneas de arriba :)
     plt <- plot(x, type = 'trace', which.items=var_id, main=titulo, scales="free", ...)
+
+    if (!is.null(nombre_curvas)) {
+        levels(plt$panel.args.common$groups) <- nombre_curvas
+    }
+
     # Ponemos las etiquetas
     plt <- direct.label(plt, 'top.points')
     
@@ -46,6 +51,9 @@ colnames(Science)
 plot_mirt(x,c("Work"), c("Soy una variable"), titulo="Hola")
 plot_mirt(x,c("Work"), c("Soy una variable"), titulo="") 
 plot_mirt(x,c("Work"), c("Soy una variable")) # Si no ponemos título, no sale
+# Cambiamos el nombre de las curvas de P1,...,P4 a 0,..,3
+plot_mirt(x,c("Work"), c("Soy una variable"), nombre_curvas=c(0,1,2,3)) 
+plot_mirt(x,c("Work"), c("Soy una variable"), nombre_curvas=c('Hello','This','Works','nicely')) 
 # Dos variables
 plot_mirt(x,c("Work","Benefit"), c("Soy una variable","Yo otra")) 
 # Dos variables una encima de la otra (una columna, dos filas -> c(1,2))
