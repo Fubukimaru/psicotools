@@ -53,6 +53,8 @@ plot_mirt(x,c("Work"), c("Soy una variable"), titulo="")
 plot_mirt(x,c("Work"), c("Soy una variable")) # Si no ponemos título, no sale
 # Cambiamos el nombre de las curvas de P1,...,P4 a 0,..,3
 plot_mirt(x,c("Work"), c("Soy una variable"), nombre_curvas=c(0,1,2,3)) 
+ES
+9+
 plot_mirt(x,c("Work"), c("Soy una variable"), nombre_curvas=c('Hello','This','Works','nicely')) 
 # Dos variables
 plot_mirt(x,c("Work","Benefit"), c("Soy una variable","Yo otra")) 
@@ -64,10 +66,19 @@ plot_mirt(x,todos_los_nombres, todos_los_nombres)
 plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(1,4))
 plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(4,1))
 
+# asp controla la proporción entre alto y ancho de la imagen (1, alto y ancho iguales)
+plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(2,1), asp=1)
+plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(3,1), asp=1)
+
+
+
+# Todas las modificaciones en conjunto
+plot_mirt(x,todos_los_nombres, todos_los_nombres, nombre_curvas=c(':(',':|',':)',':D'), layout=c(2,2), asp=0.5)
+
 
 # Sacamos el fichero en SVG, imagen vectorial (a lo excel). Podemos editarla con
 # inkscape por ejemplo.
-plot_mirt(x,todos_los_nombres, todos_los_nombres, nombre_svg="hello.svg", layout=c(2,2))
+plot_mirt(x,todos_los_nombres, todos_los_nombres, nombre_svg="hello.svg", layout=c(1,2))
 # Ahora le decimos que queremos una imagen de 10x10 pulgadas
 plot_mirt(x,todos_los_nombres, todos_los_nombres, nombre_svg="hello.svg", res=c(10,10), layout=c(2,2))
 
