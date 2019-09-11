@@ -71,9 +71,9 @@ plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(2,1), asp=1)
 plot_mirt(x,todos_los_nombres, todos_los_nombres, layout=c(3,1), asp=1)
 
 
-
+nombres <- c('patito','cosquillas','holita','soy un titulo')
 # Todas las modificaciones en conjunto
-plot_mirt(x,todos_los_nombres, todos_los_nombres, nombre_curvas=c(':(',':|',':)',':D'), layout=c(2,2), asp=0.5)
+plot_mirt(x,todos_los_nombres, nombres, nombre_curvas=c(':(',':|',':)',':D'), layout=c(3,3), asp=0.5)
 
 
 # Sacamos el fichero en SVG, imagen vectorial (a lo excel). Podemos editarla con
