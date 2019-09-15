@@ -1,17 +1,12 @@
-# TODO: Ordenar plots
-# TODO: Titular en blanco
-# TODO: Números curva más separados
-# TODO: Fijar tamaño salida (SVG?)
 
 # Cargamos MIRT y el paquete para poner las etiquetas encima de las curvas
 library(mirt)
 
-# Cargamos la función
+# Cargamos la función. Requiere el paquete direct.labels
 source("irt_plotter.r")
 
 # Hacemos el IRT
 x <- mirt(Science, 1, SE = TRUE)
-
 
 # Miramos que variables tiene Science
 colnames(Science)
@@ -19,8 +14,13 @@ colnames(Science)
 
 # Definimos variables auxiliares
 todos_los_nombres <- colnames(Science)
-nombres <- c("patito", "cosquillas", "holita", "soy un titulo")
-nombre_curvas <- c(":(", ":|", ":)", ":D")
+nombres_a_mostrar <- c("Primera var", "Segunda var", "Tercera var", "Cuarta Var")
+nombre_curvas <- c("0", "1", "2", "3")
+
+
+
+
+######################### DIFERENTES PRUEBAS ###################################
 
 # Ahora llamamos a la función de arriba. Plot de una variable
 plot_mirt(x, c("Work"), c("Soy una variable"), titulo = "Hola")
@@ -43,6 +43,7 @@ plot_mirt(x, c("Work", "Benefit"), c("Soy una variable", "Yo otra"),
 plot_mirt(x, todos_los_nombres, todos_los_nombres)
 plot_mirt(x, todos_los_nombres, todos_los_nombres, layout = c(1, 4))
 plot_mirt(x, todos_los_nombres, todos_los_nombres, layout = c(4, 1))
+plot_mirt(x, todos_los_nombres, todos_los_nombres, layout = c(3, 2))
 
 # asp controla la proporción entre alto y ancho de la imagen (1, alto y ancho 
 #  iguales)
@@ -53,44 +54,26 @@ plot_mirt(x, todos_los_nombres, todos_los_nombres, layout = c(3, 1), asp = 1)
 plot_mirt(x, todos_los_nombres, todos_los_nombres,
           layout = c(4, 1), asp = 1, lwd = 2)
 
-# Todas las modificaciones en conjunto
-plot_mirt(x, todos_los_nombres, nombres,
-          nombre_curvas = nombres_curvas,
-          layout = c(3, 3), asp = 0.5)
 
-# Tamaño de letra de las variables (strip) mas grande
-plot_mirt(x, todos_los_nombres, nombres,
-          nombre_curvas = nombres_curvas,
-          layout = c(3, 3), asp = 0.5, par.strip.text = list(cex = 1.5))
+# Estilo de barra
+plot_mirt(x, todos_los_nombres, todos_los_nombres,
+          res = c(10, 10), layout = c(2, 2), lwd = 3)
 
-# estilo_etiqueta <- function(which.panel, factor.levels, ...) {
-#     panel.rect(0, 0, 1, 1,
-#                col = "white",
-#                border = 1)
-#     panel.text(x = 0.5, y = 0.5,
-#                font = 4,
-#                lab = factor.levels[which.panel],
-#                col = "black")
-# }
-# 
-# # Fondo blanco y tamaño de letra de las variables (strip) mas grande
-# plot_mirt(x, todos_los_nombres, nombres,
-#           nombre_curvas = c(":(", ":|", ":)", ":D"),
-#           layout = c(3, 3), asp = 0.5, strip = estilo_etiqueta)
-# 
+plot_mirt(x, todos_los_nombres, todos_los_nombres,
+          res = c(10, 10), layout = c(2, 2), lwd = 3,
+          tam_letra_barra = 1.5, color_barra = "green")
 
+# Todas las modificaciones en conjunto con nombres diferentes
+plot_mirt(x, todos_los_nombres, nombres_a_mostrar,
+          nombre_curvas = nombre_curvas,
+          tam_letra_barra = 1.5, color_barra = "white", lwd = 2,
+          layout = c(3, 3), asp = 0.6)
 
 # Sacamos el fichero en SVG, imagen vectorial (a lo excel). Podemos editarla con
 # inkscape por ejemplo.
-plot_mirt(x, todos_los_nombres, todos_los_nombres, nombre_svg = "hello.svg",
-          layout = c(1, 2))
-# Ahora le decimos que queremos una imagen de 10x10 pulgadas
-plot_mirt(x, todos_los_nombres, todos_los_nombres, nombre_svg = "hello.svg",
-          res = c(10, 10), layout = c(2, 2))
-
-plot_mirt(x, todos_los_nombres, todos_los_nombres,
-          res = c(10, 10), layout = c(2, 2), lwd = 1)
-plot_mirt(x, todos_los_nombres, todos_los_nombres,
-          res = c(10, 10), layout = c(2, 2), lwd = 2)
-plot_mirt(x, todos_los_nombres, todos_los_nombres,
-          res = c(10, 10), layout = c(2, 2), lwd = 3)
+# Ahora le decimos en "res" que queremos una imagen de 20x20 pulgadas
+plot_mirt(x, todos_los_nombres, nombres_a_mostrar,
+          nombre_curvas = nombre_curvas,
+          tam_letra_barra = 1.5, color_barra = "white", lwd = 2,
+          layout = c(3, 3), asp = 0.6, res = c(20, 20),
+          nombre_svg = "final.svg")
